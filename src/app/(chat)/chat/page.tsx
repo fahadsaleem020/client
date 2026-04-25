@@ -79,6 +79,11 @@ export default function ChatPage() {
     setIsProcessing(true);
     setMessages((p) => [...p, { message, type: "user" }]);
     socket.emit("send-message", { data, message });
+
+    // This forces the keyboard to close on mobile and removes focus on desktop
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
   };
 
   return (
